@@ -9,7 +9,7 @@ function useDeviceContacts(){
           const { status } = await Contacts.requestPermissionsAsync();
           if (status === 'granted') {
             const { data } = await Contacts.getContactsAsync({
-              fields: [Contacts.Fields.Emails],
+              fields: [Contacts.Fields.Image],
             });
     
             if (data.length > 0) {

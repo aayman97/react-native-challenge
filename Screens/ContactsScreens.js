@@ -9,6 +9,7 @@ const ContactsScreen = () =>{
 
     const contacts = useDeviceContacts()
     
+   
 
     return(
 
@@ -16,6 +17,13 @@ const ContactsScreen = () =>{
             width,height,backgroundColor: "#252026"
         }}>
 
+
+        <View style={{
+            width,
+            height : height*0.25
+        }}>
+
+        </View>
         <FlatList
         data={contacts.sort((function(a, b){
             if(a.firstName < b.firstName) { return -1; }
@@ -25,7 +33,7 @@ const ContactsScreen = () =>{
         keyExtractor={(_,i) => i}
         renderItem={(contact)=>{
            return(
-               <ContactCard key={contact.index} contactDetails={contact.item} width height/>
+               <ContactCard key={contact.index} contactDetails={contact.item} width={width} height={height}/>
            )
         }}
         />
