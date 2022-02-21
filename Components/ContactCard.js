@@ -19,7 +19,16 @@ const ContactCard = ({
     } else {
       removeFromFavorites(contactDetails);
     }
-  }, [selected, favorites]);
+  }, [selected]);
+
+  useEffect(() => {
+    if (favorites.indexOf(contactDetails) === -1) {
+      isSelected(false);
+    } else {
+      isSelected(true);
+    }
+  }, [favorites]);
+
   return (
     <View
       style={{

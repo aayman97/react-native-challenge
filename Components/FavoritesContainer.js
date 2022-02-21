@@ -14,13 +14,18 @@ const FavoritesContainer = ({
     <View
       style={{
         width,
-        height: height * 0.15,
+        height: favorites.length > 0 ? height * 0.15 : 0,
       }}
     >
       <FlatList
         data={favorites}
         keyExtractor={(_, i) => i}
         horizontal
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
         renderItem={({ item, index }) => {
           return (
             <FavoriteIcon

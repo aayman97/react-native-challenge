@@ -1,25 +1,25 @@
-import React, { useEffect,useState} from 'react';
-import * as Contacts from 'expo-contacts';
+import React, { useEffect, useState } from "react";
+import * as Contacts from "expo-contacts";
 
-function useDeviceContacts(){
+function useDeviceContacts() {
+  const [contacts, setContacts] = useState([]);
 
-    const [contacts,setContacts] = useState([])
-    useEffect(() => {
-        (async () => {
-          const { status } = await Contacts.requestPermissionsAsync();
-          if (status === 'granted') {
-            const { data } = await Contacts.getContactsAsync({
-              fields: [Contacts.Fields.Image],
-            });
-    
-            if (data.length > 0) {
-             setContacts(data)
-            }
-          }
-        })();
-      }, []);
+  useEffect(() => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === "granted") {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Image],
+        });
 
-      return contacts
-} 
+        if (data.length > 0) {
+          setContacts(data);
+        }
+      }
+    })();
+  }, []);
 
-export  {useDeviceContacts};
+  return contacts;
+}
+
+export { useDeviceContacts };

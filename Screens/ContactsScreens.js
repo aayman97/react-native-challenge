@@ -12,11 +12,24 @@ import { useDeviceContacts } from "../hooks/useDeviceContacts";
 import { Feather } from "@expo/vector-icons";
 import FavoritesContainer from "../Components/FavoritesContainer";
 import { connect } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
 
 const { width, height } = Dimensions.get("screen");
 
 const ContactsScreen = ({ favorites }) => {
+  const [searchInput, setSearchInput] = useState("");
   const contacts = useDeviceContacts();
+
+  const keyExtractor = useCallback((item) => item.id.toString(), []);
+
+  const renderItem = (contact) => (
+    <ContactCard
+      key={contact.index}
+      contactDetails={contact.item}
+      width={width}
+      height={height}
+    />
+  );
 
   return (
     <View
@@ -113,6 +126,7 @@ const ContactsScreen = ({ favorites }) => {
           <Feather name="search" size={25} color="#a29da3" />
 
           <TextInput
+            onChangeText={(e) => setSearchInput(e)}
             placeholder="Search"
             placeholderTextColor={"#a29da3"}
             style={{
@@ -129,26 +143,29 @@ const ContactsScreen = ({ favorites }) => {
 
       <FavoritesContainer width={width} height={height} />
       <FlatList
-        data={contacts.sort(function (a, b) {
-          if (a.firstName < b.firstName) {
-            return -1;
-          }
-          if (a.firstName > b.firstName) {
-            return 1;
-          }
-          return 0;
+        getItemLayout={(data, index) => ({
+          length: height * 0.072,
+          offset: height * 0.072 * index,
+          index,
         })}
-        keyExtractor={(_, i) => i}
-        renderItem={(contact) => {
-          return (
-            <ContactCard
-              key={contact.index}
-              contactDetails={contact.item}
-              width={width}
-              height={height}
-            />
-          );
-        }}
+        data={contacts
+          .filter(
+            (item) =>
+              String(item.name)
+                .substring(0, searchInput.length)
+                .toLowerCase() === searchInput.toLowerCase()
+          )
+          .sort(function (a, b) {
+            if (a.firstName < b.firstName) {
+              return -1;
+            }
+            if (a.firstName > b.firstName) {
+              return 1;
+            }
+            return 0;
+          })}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
       />
     </View>
   );
