@@ -2,6 +2,7 @@ import { Dimensions, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import ContactCard from '../Components/ContactCard';
 import {useDeviceContacts} from '../hooks/useDeviceContacts'
 import { Feather } from '@expo/vector-icons';
+import FavoritesContainer from '../Components/Favorites-Container/FavoritesContainer';
 
 
 const {width,height} = Dimensions.get('screen')
@@ -110,14 +111,8 @@ const ContactsScreen = () =>{
            
         </View>
                   {/*favorites container */}
-        <View style={{
-            width,
-            height : height*0.15
-        }}>
-            
-
-        </View>
-
+     
+                <FavoritesContainer width={width} height={height}/>
         <FlatList
         data={contacts.sort((function(a, b){
             if(a.firstName < b.firstName ) { return -1; }

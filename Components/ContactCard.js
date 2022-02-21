@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Text, View,Image, TouchableOpacity} from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import {connect} from 'react-redux'
 
 
-
-const ContactCard =({contactDetails,width,height})=>{
+const ContactCard =({contactDetails,width,height,favorites,addToFavorites,removeFromFavorites})=>{
 
     const [selected,isSelected] = useState(false)
+
+    useEffect(()=>{
+        if(selected){
+            addToFavorites(contactDetails)
+        }else{
+            removeFromFavorites(contactDetails)
+        }
+    },[selected])
     return(
         
        <View style={{
@@ -84,4 +92,18 @@ const ContactCard =({contactDetails,width,height})=>{
 
 }
 
-export default ContactCard;
+
+function mapStateToProps(state){
+    return {
+        favorites : state,
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {
+        addToFavorites : (item) => dispatch({type : 'ADD_TO_FAVORITES',payload : item}),
+        removeFromFavorites : (item) => dispatch({type : 'REMOVE_FROM_FAVORITES',payload : item})
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ContactCard);
