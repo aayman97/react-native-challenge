@@ -1,7 +1,6 @@
 import {
   Dimensions,
   FlatList,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -12,7 +11,7 @@ import { useDeviceContacts } from "../hooks/useDeviceContacts";
 import { Feather } from "@expo/vector-icons";
 import FavoritesContainer from "../Components/FavoritesContainer";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 const { width, height } = Dimensions.get("screen");
 

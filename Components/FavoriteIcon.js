@@ -1,6 +1,5 @@
 import { Text, Image, View, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { connect } from "react-redux";
 
 const FavoriteIcon = ({
   diameterOfTheImage,

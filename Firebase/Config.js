@@ -19,4 +19,4 @@ var app = initializeApp(firebaseConfig);
 var firebaseAuth = getAuth(app);
 var projectFirestore = getFirestore(app);
 
-export { projectFirestore, firebaseAuth };
+export { projectFirestore, firebaseAuth, app, firebaseConfig };

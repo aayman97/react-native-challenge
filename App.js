@@ -14,7 +14,7 @@ export default function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <View style={styles.container}>
-          <LogInScreenWithEmail />
+          <LogInScreenWithPhoneNumber />
         </View>
       </QueryClientProvider>
     </Provider>

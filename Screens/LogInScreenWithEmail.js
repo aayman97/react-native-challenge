@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Dimensions,
-  FlatList,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -19,9 +17,9 @@ const LogInScreenWithEmail = () => {
     password: "",
   });
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <View

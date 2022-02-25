@@ -3,24 +3,49 @@ import {
   signInWithEmailAndPassword,
   signOut,
   signInWithPhoneNumber,
-  RecaptchaVerifier,
 } from "firebase/auth";
 import { firebaseAuth } from "./Config";
 
 firebaseAuth.languageCode = "it";
-const appVerifier = window.recaptchaVerifier;
 
-const SignInWithPhoneNo = (phoneNumber) => {
-  return signInWithPhoneNumber(firebaseAuth, phoneNumber, appVerifier)
-    .then((confirmationResult) => {
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      window.confirmationResult = confirmationResult;
-      // ...
+const SignInWithPhoneNo = async (recaptchaVerifier, setUser, user) => {
+  try {
+    const verification = await signInWithPhoneNumber(
+      firebaseAuth,
+      `+2${user.phoneNumber}`,
+      recaptchaVerifier.current
+    );
+    setUser({
+      ...user,
+      verification: verification,
+      error: false,
+      errMessage: "Verification code has been sent to your phone.",
+    });
+  } catch (err) {
+    setUser({
+      ...user,
+      error: true,
+      errMessage: err.message,
+    });
+  }
+  return;
+};
+
+const VerifyCode = async (setUser, user) => {
+  await user.verification
+    .confirm(user.verificationCode)
+    .then((user) => {
+      setUser({
+        ...user,
+        verified: true,
+      });
     })
-    .catch((error) => {
-      // Error; SMS not sent
-      // ...
+    .catch((err) => {
+      setUser({
+        ...user,
+        verified: false,
+        verficationError: err.message,
+      });
     });
 };
 
@@ -68,4 +93,10 @@ const SignOut = () => {
     });
 };
 
-export { CreateAccountWithEmail, SignInWithEmail, SignOut };
+export {
+  SignInWithPhoneNo,
+  CreateAccountWithEmail,
+  SignInWithEmail,
+  SignOut,
+  VerifyCode,
+};

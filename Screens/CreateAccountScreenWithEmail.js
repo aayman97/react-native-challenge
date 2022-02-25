@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import {
   Dimensions,
-  FlatList,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import {
-  CreateAccountWithEmail,
-  SignInWithEmail,
-  SignOut,
-} from "../Firebase/Authentication";
+import { CreateAccountWithEmail } from "../Firebase/Authentication";
 
 const { width, height } = Dimensions.get("screen");
 
