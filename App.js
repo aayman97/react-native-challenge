@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import LogInScreenWithEmail from "./Screens/LogInScreenWithEmail";
 import CreateAccountScreenWithEmail from "./Screens/CreateAccountScreenWithEmail";
 import LogInScreenWithPhoneNumber from "./Screens/LoginWithPhoneNumber";
+import Trial from "./Screens/Experiment";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,7 @@ export default function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <View style={styles.container}>
-          <LogInScreenWithPhoneNumber />
+          <ContactsScreen />
         </View>
       </QueryClientProvider>
     </Provider>

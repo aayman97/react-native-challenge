@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import * as Contacts from "expo-contacts";
+import { View } from "react-native";
 import { useQuery } from "react-query";
+import * as Contacts from "expo-contacts";
 
-function useDeviceContacts() {
+const Trial = () => {
   const result = useQuery("contacts", async () => {
     const { status } = await Contacts.requestPermissionsAsync();
     if (status === "granted") {
@@ -11,11 +11,14 @@ function useDeviceContacts() {
       });
 
       if (data.length > 0) {
+        console.log("data");
         return data;
+      } else {
+        return;
       }
     }
   });
-  return result;
-}
+  return <View>{console.log(result.data)}</View>;
+};
 
-export { useDeviceContacts };
+export default Trial;
