@@ -100,15 +100,4 @@ const FavoriteIcon = ({
   );
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     favorites: state,
-//   };
-// }
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     removeFromFavorites: (item) =>
-//       dispatch({ type: "REMOVE_FROM_FAVORITES", payload: item }),
-//   };
-// }
 export default FavoriteIcon;

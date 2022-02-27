@@ -149,12 +149,6 @@ const ContactsScreen = ({ favorites }) => {
 
           {/* Contacts */}
 
-          {/* <ContactsList
-            contacts={contacts}
-            searchInput={searchInput}
-            width={width}
-            height={height}
-          /> */}
           <FlatList
             getItemLayout={(data, index) => ({
               length: height * 0.072,

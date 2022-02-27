@@ -46,7 +46,7 @@ const CreateAccountScreenWithEmail = ({ navigation }) => {
             ],
           }}
         >
-          {"error"}
+          {user.error}
         </Text>
       ) : null}
       {/* Email Search Input */}
