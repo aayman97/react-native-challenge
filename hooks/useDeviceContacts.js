@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import * as Contacts from "expo-contacts";
 import { useQuery } from "react-query";
 

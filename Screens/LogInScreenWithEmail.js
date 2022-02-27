@@ -19,10 +19,6 @@ const LogInScreenWithEmail = ({ navigation }) => {
     SignedIn: false,
   });
 
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-
   return (
     <View
       style={{

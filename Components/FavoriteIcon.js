@@ -4,9 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 const FavoriteIcon = ({
   diameterOfTheImage,
   width,
-  height,
   item,
-  favorites,
   removeFromFavorites,
 }) => {
   return (

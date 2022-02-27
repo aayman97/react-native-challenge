@@ -18,10 +18,6 @@ const CreateAccountScreenWithEmail = ({ navigation }) => {
     error: "",
   });
 
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-
   return (
     <View
       style={{

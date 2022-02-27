@@ -2,7 +2,6 @@ import {
   ActivityIndicator,
   Dimensions,
   FlatList,
-  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
