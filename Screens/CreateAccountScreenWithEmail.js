@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Dimensions,
   Text,
@@ -11,15 +11,16 @@ import { CreateAccountWithEmail } from "../Firebase/Authentication";
 
 const { width, height } = Dimensions.get("screen");
 
-const CreateAccountScreenWithEmail = () => {
+const CreateAccountScreenWithEmail = ({ navigation }) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    error: "",
   });
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <View
@@ -29,8 +30,25 @@ const CreateAccountScreenWithEmail = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#252026",
+        position: "relative",
       }}
     >
+      {user.error.length > 0 ? (
+        <Text
+          style={{
+            color: "red",
+            fontSize: 20,
+            position: "absolute",
+            transform: [
+              {
+                translateY: -height * 0.3,
+              },
+            ],
+          }}
+        >
+          {"error"}
+        </Text>
+      ) : null}
       {/* Email Search Input */}
       <View
         style={{
@@ -118,7 +136,7 @@ const CreateAccountScreenWithEmail = () => {
           shadowRadius: 10,
         }}
         onPress={() => {
-          console.log(CreateAccountWithEmail(user.email, user.password));
+          CreateAccountWithEmail(user, setUser, navigation);
         }}
       >
         <Text

@@ -11,10 +11,12 @@ import { SignInWithEmail, SignOut } from "../Firebase/Authentication";
 
 const { width, height } = Dimensions.get("screen");
 
-const LogInScreenWithEmail = () => {
+const LogInScreenWithEmail = ({ navigation }) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    error: "",
+    SignedIn: false,
   });
 
   // useEffect(() => {
@@ -29,8 +31,27 @@ const LogInScreenWithEmail = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#252026",
+        position: "relative",
       }}
     >
+      {/* Error Message */}
+
+      {user.error.length > 0 ? (
+        <Text
+          style={{
+            color: "red",
+            fontSize: 20,
+            position: "absolute",
+            transform: [
+              {
+                translateY: -height * 0.3,
+              },
+            ],
+          }}
+        >
+          {user.error}
+        </Text>
+      ) : null}
       {/* Email Search Input */}
       <View
         style={{
@@ -119,9 +140,7 @@ const LogInScreenWithEmail = () => {
           shadowRadius: 10,
         }}
         onPress={() => {
-          console.log(
-            SignInWithEmail({ email: user.email, password: user.password })
-          );
+          SignInWithEmail(user, setUser, navigation);
         }}
       >
         <Text
@@ -149,18 +168,18 @@ const LogInScreenWithEmail = () => {
           shadowRadius: 10,
         }}
         onPress={() => {
-          SignOut(user.email, user.password);
+          navigation.navigate("Create An Account");
         }}
       >
         <Text
           style={{
             color: "#a29da3",
             fontWeight: "700",
-            fontSize: 20,
+            fontSize: 18,
           }}
         >
           {" "}
-          Sign Out
+          Create An Account
         </Text>
       </TouchableOpacity>
     </View>

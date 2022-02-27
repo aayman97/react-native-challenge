@@ -16,7 +16,7 @@ import { firebaseConfig } from "../Firebase/Config";
 
 const { width, height } = Dimensions.get("screen");
 
-const LogInScreenWithPhoneNumber = () => {
+const LogInScreenWithPhoneNumber = ({ navigation }) => {
   const [user, setUser] = useState({
     phoneNumber: "",
     verification: null,
@@ -160,7 +160,7 @@ const LogInScreenWithPhoneNumber = () => {
             width: width * 0.5,
             height: height * 0.08,
             borderRadius: 10,
-            backgroundColor: "#4f4a50",
+            backgroundColor: !user.verification ? "gray" : "#4f4a50",
             alignItems: "center",
             justifyContent: "center",
             marginTop: height * 0.04,
@@ -169,7 +169,7 @@ const LogInScreenWithPhoneNumber = () => {
           }}
           onPress={() => {
             if (user.verification) {
-              VerifyCode(setUser, user);
+              VerifyCode(setUser, user, navigation);
             }
           }}
         >

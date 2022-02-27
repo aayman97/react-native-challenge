@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Dimensions,
   FlatList,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -13,6 +14,7 @@ import { Feather } from "@expo/vector-icons";
 import FavoritesContainer from "../Components/FavoritesContainer";
 import { connect } from "react-redux";
 import { useCallback, useState, useEffect } from "react";
+import ContactsList from "../Components/ContactsList";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -146,6 +148,13 @@ const ContactsScreen = ({ favorites }) => {
           <FavoritesContainer width={width} height={height} />
 
           {/* Contacts */}
+
+          {/* <ContactsList
+            contacts={contacts}
+            searchInput={searchInput}
+            width={width}
+            height={height}
+          /> */}
           <FlatList
             getItemLayout={(data, index) => ({
               length: height * 0.072,

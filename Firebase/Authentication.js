@@ -31,7 +31,7 @@ const SignInWithPhoneNo = async (recaptchaVerifier, setUser, user) => {
   return;
 };
 
-const VerifyCode = async (setUser, user) => {
+const VerifyCode = async (setUser, user, navigation) => {
   await user.verification
     .confirm(user.verificationCode)
     .then((user) => {
@@ -39,6 +39,7 @@ const VerifyCode = async (setUser, user) => {
         ...user,
         verified: true,
       });
+      navigation.navigate("Phone Contacts");
     })
     .catch((err) => {
       setUser({
@@ -49,37 +50,53 @@ const VerifyCode = async (setUser, user) => {
     });
 };
 
-const CreateAccountWithEmail = (email, password) => {
-  return createUserWithEmailAndPassword(firebaseAuth, email, password)
+const CreateAccountWithEmail = (user, setUser, navigation) => {
+  return createUserWithEmailAndPassword(firebaseAuth, user.email, user.password)
     .then((userCredential) => {
       // Signed in
-      const user = userCredential.user;
-      console.log("Account Created : ", user);
-      // ...
+      // const user = userCredential.user;
+
+      setUser({
+        ...user,
+        error: "",
+      });
+
+      navigation.goBack();
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
-      console.log(errorMessage);
+      setUser({
+        ...user,
+        error: error.code,
+      });
       // ..
     });
 };
 
-const SignInWithEmail = ({ email, password }) => {
-  return signInWithEmailAndPassword(firebaseAuth, email, password)
+const SignInWithEmail = (user, setUser, navigation) => {
+  return signInWithEmailAndPassword(firebaseAuth, user.email, user.password)
     .then((userCredential) => {
       // Signed in
       //   user = userCredential.user;
-      console.log(userCredential.user);
-
+      // console.log(userCredential.user);
       // ...
+      setUser({
+        ...user,
+        error: "",
+        SignedIn: true,
+      });
+      navigation.navigate("Phone Contacts");
     })
     .catch((e) => {
       const errorCode = e.code;
       const errorMessage = e.message;
 
-      console.log(errorMessage);
+      setUser({
+        ...user,
+        error: e.code,
+      });
     });
 };
 

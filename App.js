@@ -1,12 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
-import ContactsScreen from "./Screens/ContactsScreens";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import { QueryClient, QueryClientProvider } from "react-query";
-import LogInScreenWithEmail from "./Screens/LogInScreenWithEmail";
-import CreateAccountScreenWithEmail from "./Screens/CreateAccountScreenWithEmail";
-import LogInScreenWithPhoneNumber from "./Screens/LoginWithPhoneNumber";
-import Trial from "./Screens/Experiment";
+import WholeApp from "./Navigation/NavigationForTheApp";
 
 const queryClient = new QueryClient();
 
@@ -14,9 +10,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <View style={styles.container}>
-          <ContactsScreen />
-        </View>
+        <WholeApp />
       </QueryClientProvider>
     </Provider>
   );
