@@ -13,7 +13,6 @@ import { Feather } from "@expo/vector-icons";
 import FavoritesContainer from "../Components/FavoritesContainer";
 import { connect } from "react-redux";
 import { useCallback, useState, useEffect } from "react";
-import ContactsList from "../Components/ContactsList";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -40,7 +39,7 @@ const ContactsScreen = ({ favorites }) => {
         backgroundColor: "#252026",
       }}
     >
-      {contacts.status === "success" ? (
+      {contacts.status === "success" && contacts.data ? (
         <>
           <View
             style={{
@@ -96,7 +95,8 @@ const ContactsScreen = ({ favorites }) => {
                     lineHeight: 25,
                   }}
                 >
-                  {favorites.length} / {contacts.data.length}
+                  {favorites.length} /{" "}
+                  {contacts.data ? contacts.data.length : 1}
                 </Text>
               </View>
 
@@ -154,7 +154,7 @@ const ContactsScreen = ({ favorites }) => {
               offset: height * 0.072 * index,
               index,
             })}
-            data={contacts.data
+            data={contacts?.data
               .filter(
                 (item) =>
                   String(item.name)
